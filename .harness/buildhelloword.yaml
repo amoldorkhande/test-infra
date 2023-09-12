@@ -1,0 +1,38 @@
+pipeline:
+  name: build-helloword
+  identifier: buildhelloword
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github
+        repoName: dotnetcore-docs-hello-world
+        build: <+input>
+  stages:
+    - stage:
+        name: build-docker
+        identifier: builddocker
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: dockerharness
+                    repo: amoldorkhande
+                    tags:
+                      - v1
+                    optimize: false
+          platform:
+            os: Windows
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
