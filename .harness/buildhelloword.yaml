@@ -8,13 +8,12 @@ pipeline:
     ci:
       codebase:
         connectorRef: account.Github
-        repoName: dotnetcore-docs-hello-world
+        repoName: Azure-Samples/dotnetcore-docs-hello-world
         build: <+input>
   stages:
     - stage:
         name: build-docker
         identifier: builddocker
-        description: ""
         type: CI
         spec:
           cloneCodebase: true
