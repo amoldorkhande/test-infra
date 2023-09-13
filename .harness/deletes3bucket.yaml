@@ -1,0 +1,29 @@
+pipeline:
+  name: delete-s3-bucket
+  identifier: deletes3bucket
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: delete_s3
+        identifier: delete_s3
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: DeleteStack
+                  name: Deletes3
+                  identifier: Deletes3
+                  spec:
+                    configuration:
+                      type: Inline
+                      spec:
+                        connectorRef: AWSconnector
+                        region: ap-south-1
+                        stackName: mys3bucket
+                      connectorRef: AWSconnector
+                  timeout: 10m
+        tags: {}
