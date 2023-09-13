@@ -1,0 +1,29 @@
+pipeline:
+  name: delete ecs
+  identifier: delete_ecs
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: delete eks
+        identifier: delete_eks
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: DeleteStack
+                  name: DeleteStack_1
+                  identifier: DeleteStack_1
+                  spec:
+                    configuration:
+                      type: Inline
+                      spec:
+                        connectorRef: AWSconnector
+                        region: ap-south-1
+                        stackName: ecs-name-new
+                      connectorRef: AWSconnector
+                  timeout: 10m
+        tags: {}
