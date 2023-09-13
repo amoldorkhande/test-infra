@@ -1,0 +1,56 @@
+pipeline:
+  name: ecs
+  identifier: ecs
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: ECS_create
+        identifier: ECS_create
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: CreateStack
+                  name: CreateEcs
+                  identifier: CreateEcs
+                  spec:
+                    provisionerIdentifier: ecs
+                    configuration:
+                      stackName: ecs-name-new
+                      connectorRef: AWSconnector
+                      region: ap-south-1
+                      templateFile:
+                        type: Remote
+                        spec:
+                          store:
+                            type: Github
+                            spec:
+                              paths:
+                                - ECS.yaml
+                              connectorRef: githarness
+                              repoName: Harness
+                              gitFetchType: Branch
+                              branch: main
+                      roleArn: ""
+                      parameterOverrides:
+                        - name: Subnet1
+                          value: subnet-069a39317ef4dbbbe
+                          type: String
+                        - name: Subnet2
+                          value: subnet-06e299a94069f053c
+                          type: String
+                        - name: ServiceName
+                          value: myecs-service
+                          type: String
+                        - name: ECSClusterName
+                          value: ecsclstr
+                          type: String
+                        - name: VPC
+                          value: vpc-063e42b23f2d4fe43
+                          type: String
+                  timeout: 10m
+        tags: {}
