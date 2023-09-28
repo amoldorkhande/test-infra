@@ -8,7 +8,7 @@ pipeline:
     ci:
       codebase:
         connectorRef: account.Github
-        repoName: amoldorkhande/dotnetcore-docs-hello-world
+        repoName: Azure-Samples/dotnetcore-docs-hello-world
         build: <+input>
   stages:
     - stage:
