@@ -36,5 +36,3 @@ pipeline:
           runtime:
             type: Docker
             spec: {}
-        delegateSelectors:
-          - docker-delegate
