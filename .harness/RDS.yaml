@@ -62,7 +62,7 @@ pipeline:
                           value: testpara
                           type: String
                         - name: DatabaseInstanceName
-                          value: gdfghadv-bdhjavdr
+                          value: <+input>
                           type: String
                   timeout: 30m
         tags: {}
