@@ -1,0 +1,68 @@
+pipeline:
+  name: RDS
+  identifier: RDS
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: rdscreate
+        identifier: rdscreate
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: HarnessApproval
+                  name: HarnessApproval_1
+                  identifier: HarnessApproval_1
+                  spec:
+                    approvalMessage: Please review the following information and approve the pipeline progression
+                    includePipelineExecutionHistory: true
+                    isAutoRejectEnabled: false
+                    approvers:
+                      userGroups:
+                        - account._account_all_users
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+                    approverInputs: []
+                  timeout: 1d
+              - step:
+                  type: CreateStack
+                  name: CreateStack_1
+                  identifier: CreateStack_1
+                  spec:
+                    provisionerIdentifier: rds
+                    configuration:
+                      stackName: rds create
+                      connectorRef: AWSconnector
+                      region: ap-south-1
+                      templateFile:
+                        type: Remote
+                        spec:
+                          store:
+                            type: Github
+                            spec:
+                              paths:
+                                - rds.yaml
+                              connectorRef: githarness
+                              repoName: Harness
+                              gitFetchType: Branch
+                              branch: main
+                      roleArn: ""
+                      parameterOverrides:
+                        - name: MasterUserPassword
+                          value: qwerREWQ12WS
+                          type: String
+                        - name: MasterUsername
+                          value: uyttrrrr
+                          type: String
+                        - name: ParameterGroup
+                          value: testpara
+                          type: String
+                        - name: DatabaseInstanceName
+                          value: gdfghadv-bdhjavdr
+                          type: String
+                  timeout: 10m
+        tags: {}
