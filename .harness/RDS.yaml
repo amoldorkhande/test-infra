@@ -35,7 +35,7 @@ pipeline:
                   spec:
                     provisionerIdentifier: rds
                     configuration:
-                      stackName: rds create
+                      stackName: rdasijhd
                       connectorRef: AWSconnector
                       region: ap-south-1
                       templateFile:
