@@ -1,0 +1,26 @@
+pipeline:
+  name: deleterds
+  identifier: deleterds
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: deleterds
+        identifier: deleterds
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: DeleteStack
+                  name: DeleteStack_1
+                  identifier: DeleteStack_1
+                  spec:
+                    configuration:
+                      type: Inherited
+                      spec:
+                        provisionerIdentifier: rds
+                  timeout: 30m
+        tags: {}
